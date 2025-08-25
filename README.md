@@ -15,7 +15,7 @@ This project is broken down into three main stages:
 3.  **Run the Scripts in Order:**
     * `python data_collector.py`
     * `python data_preprocessing.py`
-    * `python sentiment_analysis.py`
+    * `python model.py`
 
 ## Technologies Used
 -   **Python**
