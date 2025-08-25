@@ -2,7 +2,11 @@ import re
 import pandas as pd
 import os 
 # Import data_list, subreddit_name, and search_query from Redit_data_collecter.py
-from Redit_data_collecter import data_list, subreddit_name, search_query
+try:
+    from Redit_data_collecter import data_list, subreddit_name, search_query
+except ImportError:
+    data_list = []
+
 
 #data cleaning function
 def data_cleaning(data):
@@ -17,6 +21,9 @@ def data_cleaning(data):
     # removing stopwords
     stopwords = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's", 'her', 'hers', 'herself', 'it', "it's", 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', "that'll", 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both',"aren't","can't",'couldn',"couldn't",'didn',"didn't",'doesn',"doesn't",'hadn',"hadn't",'hasn',"hasn't",'haven',"haven't",'isn',"isn't",'ma','mightn',"mightn't",'mustn',"mustn't",'needn',"needn't",'shan',"shan't",'shouldn',"shouldn't",'wasn',"wasn't",'weren',"weren't",'won',"won't",'wouldn',"wouldn't", ] 
     data = ' '.join([word for word in data.split() if word.lower() not in stopwords]) 
+    # lowercase the text
+    data = data.lower()
+    
     return data
 
 # Save the collected data to a CSV file

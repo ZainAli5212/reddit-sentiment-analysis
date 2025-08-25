@@ -1,11 +1,11 @@
 import pandas as pd
 from textblob import TextBlob
-from data_cleaner import file_path, script_dir
 from textblob.exceptions import MissingCorpusError
-
-
-# df.drop("comments", axis=1, inplace=True)
-# df.dropna(subset=['cleaned_comments'], inplace=True)
+try:
+    from data_cleaner import file_path, script_dir
+except ImportError:
+    file_path = None
+    script_dir = None
 
 import os
 
@@ -75,14 +75,14 @@ def main():
     print("\nOverall Sentiment Distribution:")
     print(sentiment_counts.to_string())
 
-    # final_file_name = f"{os.path.splitext(cleaned_file_name)[0]}_final.csv"
-    # final_file_path = os.path.join(script_dir, final_file_name)
     
     df.to_csv(file_path, index=False)
     print(f"\nFinal data with sentiment saved to {file_path}")
 
 if __name__ == "__main__":
-    main()
+    if file_path and script_dir:
+
+        main()
 
 
 
